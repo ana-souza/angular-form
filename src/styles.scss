@@ -4,8 +4,6 @@
 body { 
     padding: 5px;
     font-family: 'Roboto', sans-serif;
-
-   
 }
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; 
 
@@ -28,10 +26,10 @@ body {
   }
 
   [type=checkbox] { 
-    position: absolute;
+    /*position: absolute;
     opacity: 0;
     width: 0;
-    height: 0;
+    height: 0;*/
   }
   
   /* IMAGE STYLES */
