@@ -1,0 +1,39 @@
+<h2 style="text-align: center;">Perfil de Beleza</h2>
+<div><br /></div>
+
+
+<form [formGroup]="reactiveForm" (ngSubmit)="submit()" >
+  <mat-horizontal-stepper style="align-self: center;">
+    <mat-step *ngFor="let question of questions; let index = index; let last = last;">
+          <div class="form-array" >
+            <div><br /></div>
+            <label for={{question.name}} class="control-label">{{question.question}}</label>
+            <div><br /></div>
+          
+            <div>
+            <label *ngFor="let option of question.options">
+<!--               <input *ngIf="question.type === 2" type="checkbox" [value]=option.name [formControlName]=index required>
+ -->              <input *ngIf="question.type === 1" type="radio" [value]=option.name [formControlName]=index required>
+                <img width="170px" src="https://minha.glambox.com.br/beautyprofile{{option.imageUrl.replace('.png', '.jpg')}}" alt={{option.name}}>
+            </label>
+          </div>
+          </div>
+
+          <div><br /></div>
+
+            <button *ngIf="index !== 0" matStepperPrevious class="btn btn-primary" type="button" (click)="prevStep(index)">Anterior</button>
+            <button *ngIf="!last" matStepperNext class="btn btn-primary" type="button" [disabled]="!reactiveForm.at(index).valid" (click)="nextStep(index)">Próximo</button>
+            <button *ngIf="last" class="btn btn-primary" [disabled]="!reactiveForm.valid" type="submit">Enviar</button>
+    </mat-step>
+    
+  </mat-horizontal-stepper>
+
+ 
+
+</form>
+
+<div style="font-size: 12px;"> <br /> <br /> <br />
+  Modelo : {{this.model | json}}
+  <div>{{ reactiveForm.value | json}}</div>
+  <div>{{ reactiveForm.valid | json }}</div>
+</div>
