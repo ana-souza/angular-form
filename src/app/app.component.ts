@@ -124,10 +124,10 @@ export class AppComponent {
   reactiveForm: FormArray;
 
   activedStep = 0;
-  model = {};
-  questions: any;
-  form: any;
-  options: any;  
+  questions: Array<Questions>;
+  
+  //arrayForm: Array<string>;
+  arrayForm: Array<any>;
 
   
   public constructor(appService: AppService, formBuilder: FormBuilder) {
@@ -139,14 +139,6 @@ export class AppComponent {
     );
     console.log(this.questions);*/
 
-    /*let nome: string = "variavel"
-    this.form = new FormGroup({
-      key: new FormControl("teste"),
-      [nome]: new FormControl("tem que ta variavel") 
-
-    })
-
-    console.log(this.form)*/
 
     this.reactiveForm = new FormArray(this.questions.map( (question) => {
       
@@ -158,12 +150,14 @@ export class AppComponent {
       }
 
       if (question.type === 2) {
-        var arrayForm: Array<FormArray> = [];
+        this.arrayForm = [];
 
         for (let i = 0; i<question.options.length; i++) {
-            arrayForm.push(question.options[i].checked);
+          if (question.options[i].checked)
+            this.arrayForm[question.options[i].order] = question.options[i].name;
+          else this.arrayForm[question.options[i].order] = false;
         }
-          return new FormControl(arrayForm)
+          return new FormControl(this.arrayForm)
       }
 
       return null;
@@ -182,6 +176,30 @@ export class AppComponent {
 
   submit() {
     alert(JSON.stringify(this.reactiveForm.value));
+  }
+
+  onCheckboxChange(e, index: number, opt: Options) {
+  
+    let indexx : string = index.toString();
+    let position: number = opt.order;
+
+    //let posicao : string = 
+
+    /*if (e.target.checked) {
+      this.arrayForm.push(e.target.value);
+    } else {
+      delete this.arrayForm[index];
+    }*/
+
+    if (e.target.checked) {
+      //this.reactiveForm.get(indexx).value.push("teste");
+      this.reactiveForm.get(indexx).value[position] = opt.name;
+    }
+
+    else {
+      this.reactiveForm.get(indexx).value[position] = false;
+    }
+
   }
 }
 

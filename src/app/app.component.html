@@ -14,7 +14,7 @@
           
             <div>
                 <label *ngFor="let option of question.options"> 
-                  <input *ngIf="question.type === 2" type="checkbox" [value]=option.name [formControlName]=index > 
+                  <input *ngIf="question.type === 2" type="checkbox" [value]=option.name (change)="onCheckboxChange($event, index, option)" [checked]="option.checked"> 
                   <input *ngIf="question.type === 1" type="radio" [value]=option.name [formControlName]=index required >
                     <img width="170px" src="https://minha.glambox.com.br/beautyprofile{{option.imageUrl.replace('.png', '.jpg')}}" alt={{option.name}}>
                 </label>
@@ -30,7 +30,8 @@
 </form>
 
 <div style="font-size: 12px;"> <br /> <br /> <br />
-  Modelo : {{this.model | json}}
   <div>{{ reactiveForm.value | json}}</div>
   <div>{{ reactiveForm.valid | json }}</div>
+  {{questions[2].options[3].checked}}
+ 
 </div>
