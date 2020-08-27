@@ -5,7 +5,6 @@
 <form [formGroup]="reactiveForm" (ngSubmit)="submit()" >
   <mat-horizontal-stepper max-width="10">
     <mat-step *ngFor="let question of questions; let index = index; let last = last;">
-      {{index}}
             <div><br /></div>
 
             <label for={{question.name}} class="control-label">{{question.question}}</label>
