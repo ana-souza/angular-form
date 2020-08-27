@@ -1,6 +1,5 @@
 import { Component, Input, Inject } from '@angular/core';
 import { FormArray, FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import {AppService} from './app.service';
 
 export interface Options {
@@ -31,23 +30,14 @@ export interface Questions {
 export class AppComponent {
 
   reactiveForm: FormArray;
-
   activedStep = 0;
   questions: Array<Questions>;
-  
-  //arrayForm: Array<string>;
   arrayForm: Array<any>;
 
   
   public constructor(appService: AppService, formBuilder: FormBuilder) {
     appService = appService;
     this.questions = appService.getQuestions()
-    /*.subscribe(
-      questions => this.questions = questions,
-      error => alert('Erro')
-    );
-    console.log(this.questions);*/
-
 
     this.reactiveForm = new FormArray(this.questions.map( (question) => {
       
@@ -89,24 +79,15 @@ export class AppComponent {
 
   onCheckboxChange(e, index: number, opt: Options) {
   
-    let indexx : string = index.toString();
+    let i : string = index.toString();
     let position: number = opt.order;
 
-    //let posicao : string = 
-
-    /*if (e.target.checked) {
-      this.arrayForm.push(e.target.value);
-    } else {
-      delete this.arrayForm[index];
-    }*/
-
     if (e.target.checked) {
-      //this.reactiveForm.get(indexx).value.push("teste");
-      this.reactiveForm.get(indexx).value[position] = opt.name;
+      this.reactiveForm.get(i).value[position] = opt.name;
     }
 
     else {
-      this.reactiveForm.get(indexx).value[position] = false;
+      this.reactiveForm.get(i).value[position] = false;
     }
 
   }
