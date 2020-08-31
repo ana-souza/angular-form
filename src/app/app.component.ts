@@ -70,6 +70,12 @@ export class AppComponent {
   }
 
   nextStep(step) {
+    if (step === 3) {
+      if (this.reactiveForm.value[3] === "Estou careca (pular todas as perguntas sobre cabelo)") {
+        step = 8;
+        console.log(this.reactiveForm.value[3]);
+      }
+    }
     this.activedStep = step + 1;
   }
 
