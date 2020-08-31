@@ -3,7 +3,7 @@
 
 
 <form [formGroup]="reactiveForm" (ngSubmit)="submit()" >
-  <mat-horizontal-stepper max-width="10">
+  <mat-horizontal-stepper #stepper>
     <mat-step *ngFor="let question of questions; let index = index; let last = last;">
             <div><br /></div>
 
@@ -22,7 +22,7 @@
             <div><br /></div>
 
             <button *ngIf="index !== 0" matStepperPrevious class="btn btn-primary" type="button" (click)="prevStep(index)">Anterior</button>
-            <button *ngIf="!last" matStepperNext class="btn btn-primary" type="button" [disabled]="!reactiveForm.at(index).valid" (click)="nextStep(index)">Próximo</button>
+            <button *ngIf="!last" matStepperNext class="btn btn-primary" type="button" [disabled]="!reactiveForm.at(index).valid" (click)="nextStep(index, stepper)">Próximo</button>
             <button *ngIf="last" class="btn btn-primary" [disabled]="!reactiveForm.valid" type="submit">Enviar</button>
     </mat-step>
   </mat-horizontal-stepper>

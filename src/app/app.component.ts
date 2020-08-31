@@ -69,11 +69,10 @@ export class AppComponent {
     this.activedStep = step - 1;
   }
 
-  nextStep(step) {
+  nextStep(step, stepper) {
     if (step === 3) {
       if (this.reactiveForm.value[3] === "Estou careca (pular todas as perguntas sobre cabelo)") {
-        step = 8;
-        console.log(this.reactiveForm.value[3]);
+        stepper.selectedIndex = 8;
       }
     }
     this.activedStep = step + 1;
